@@ -1,8 +1,40 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <script type="text/javascript" src="./script.js">
-</script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sharable URLs</title>
+</head>
+<body>
 
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name"><br><br>
+
+  <label for="year">Year:</label>
+  <input type="number" id="year" name="year"><br><br>
+
+  <button id="button">Submit</button><br><br>
+
+  <h3 id="url">https://localhost:8080/</h3>
+
+  <script>
+    document.getElementById("button").addEventListener("click", function () {
+      const name = document.getElementById("name").value.trim();
+      const year = document.getElementById("year").value.trim();
+      let url = "https://localhost:8080/";
+
+      // Build query parameters
+      const params = new URLSearchParams();
+      if (name) params.append("name", name);
+      if (year) params.append("year", year);
+
+      // Append query string if there are any parameters
+      if (params.toString()) {
+        url += "?" + params.toString();
+      }
+
+      document.getElementById("url").textContent = url;
+    });
+  </script>
+
+</body>
 </html>
